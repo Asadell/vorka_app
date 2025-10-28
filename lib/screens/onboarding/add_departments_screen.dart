@@ -64,12 +64,14 @@ class _AddDepartmentsScreenState extends State<AddDepartmentsScreen> {
 
     // Create department models
     final deptModels = _departments
+        .asMap()
+        .entries
         .map(
-          (name) => DepartmentModel(
+          (entry) => DepartmentModel(
             id:
                 DateTime.now().millisecondsSinceEpoch.toString() +
-                _departments.indexOf(name).toString(),
-            name: name,
+                entry.key.toString(),
+            name: entry.value,
           ),
         )
         .toList();
@@ -85,15 +87,24 @@ class _AddDepartmentsScreenState extends State<AddDepartmentsScreen> {
     if (!mounted) return;
 
     if (success) {
-      // Refresh auth state
-      await context.read<AuthProvider>().loadCurrentUser();
-
+      // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Organisasi berhasil dibuat!'),
           backgroundColor: Colors.green,
+          duration: Duration(seconds: 2),
         ),
       );
+
+      // Wait a bit for the message to show
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      if (!mounted) return;
+
+      // Refresh auth state to get updated user data
+      await context.read<AuthProvider>().loadCurrentUser();
+
+      if (!mounted) return;
 
       // Navigate to home
       context.router.replaceAll([const MainRoute()]);
@@ -145,6 +156,7 @@ class _AddDepartmentsScreenState extends State<AddDepartmentsScreen> {
                       hintText: 'Contoh: PSDM',
                       prefixIcon: Icon(Icons.group),
                     ),
+                    textInputAction: TextInputAction.done,
                     onSubmitted: (_) => _addDepartment(),
                   ),
                 ),

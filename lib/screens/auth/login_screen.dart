@@ -32,6 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     final authProvider = context.read<AuthProvider>();
+
+    // Clear previous error
+    authProvider.clearError();
+
     final success = await authProvider.signInWithEmail(
       email: _emailController.text.trim(),
       password: _passwordController.text,
@@ -40,10 +44,15 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!mounted) return;
 
     if (success) {
-      // Check if user has organization
+      // Wait for user data to load
+      await authProvider.loadCurrentUser();
+
+      if (!mounted) return;
+
       final user = authProvider.currentUser;
-      if (user?.activeOrganizationId == null ||
-          user!.activeOrganizationId!.isEmpty) {
+
+      // Check if user has organization
+      if (user?.organizations.isEmpty ?? true) {
         // No organization, go to onboarding
         context.router.replace(const OnboardingRoute());
       } else {
@@ -51,14 +60,39 @@ class _LoginScreenState extends State<LoginScreen> {
         context.router.replace(const MainRoute());
       }
     } else {
-      // Show error
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(authProvider.error ?? 'Login gagal'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      // Show error with better UX
+      if (authProvider.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_parseFirebaseError(authProvider.error!)),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+            action: SnackBarAction(
+              label: 'OK',
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
+          ),
+        );
+      }
     }
+  }
+
+  String _parseFirebaseError(String error) {
+    if (error.contains('user-not-found')) {
+      return 'Email tidak terdaftar';
+    } else if (error.contains('wrong-password')) {
+      return 'Password salah';
+    } else if (error.contains('invalid-email')) {
+      return 'Format email tidak valid';
+    } else if (error.contains('user-disabled')) {
+      return 'Akun telah dinonaktifkan';
+    } else if (error.contains('too-many-requests')) {
+      return 'Terlalu banyak percobaan. Coba lagi nanti';
+    } else if (error.contains('network')) {
+      return 'Koneksi internet bermasalah';
+    }
+    return 'Login gagal. Silakan coba lagi';
   }
 
   @override
@@ -103,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Icon(Icons.email_outlined),
                     ),
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                     validator: Validators.validateEmail,
                   ),
                   const SizedBox(height: AppSizes.paddingM),
@@ -127,6 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     obscureText: _obscurePassword,
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (_) => _login(),
                     validator: Validators.validatePassword,
                   ),
                   const SizedBox(height: AppSizes.paddingXl),

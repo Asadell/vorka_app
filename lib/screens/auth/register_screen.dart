@@ -34,8 +34,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> _register() async {
+    // Validate form
     if (!_formKey.currentState!.validate()) return;
 
+    // Check password match
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -47,6 +49,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     final authProvider = context.read<AuthProvider>();
+
+    // Clear previous error
+    authProvider.clearError();
+
     final success = await authProvider.signUpWithEmail(
       email: _emailController.text.trim(),
       password: _passwordController.text,
@@ -56,16 +62,52 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (!mounted) return;
 
     if (success) {
+      // Registration successful, show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Registrasi berhasil! Silakan lengkapi profil Anda'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 2),
+        ),
+      );
+
+      // Wait a bit for the message to show, then navigate
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      if (!mounted) return;
+
       // After register, go to onboarding
       context.router.replace(const OnboardingRoute());
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(authProvider.error ?? 'Registrasi gagal'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      // Show error
+      if (authProvider.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_parseFirebaseError(authProvider.error!)),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+            action: SnackBarAction(
+              label: 'OK',
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
+          ),
+        );
+      }
     }
+  }
+
+  String _parseFirebaseError(String error) {
+    if (error.contains('email-already-in-use')) {
+      return 'Email sudah terdaftar. Silakan login';
+    } else if (error.contains('invalid-email')) {
+      return 'Format email tidak valid';
+    } else if (error.contains('weak-password')) {
+      return 'Password terlalu lemah. Minimal 6 karakter';
+    } else if (error.contains('network')) {
+      return 'Koneksi internet bermasalah';
+    }
+    return 'Registrasi gagal. Silakan coba lagi';
   }
 
   @override
@@ -101,6 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     labelText: 'Nama Lengkap',
                     prefixIcon: Icon(Icons.person_outline),
                   ),
+                  textInputAction: TextInputAction.next,
                   validator: Validators.validateName,
                 ),
                 const SizedBox(height: AppSizes.paddingM),
@@ -113,6 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     prefixIcon: Icon(Icons.email_outlined),
                   ),
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   validator: Validators.validateEmail,
                 ),
                 const SizedBox(height: AppSizes.paddingM),
@@ -137,6 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   obscureText: _obscurePassword,
+                  textInputAction: TextInputAction.next,
                   validator: Validators.validatePassword,
                 ),
                 const SizedBox(height: AppSizes.paddingM),
@@ -161,6 +206,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   obscureText: _obscureConfirmPassword,
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (_) => _register(),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Konfirmasi password tidak boleh kosong';

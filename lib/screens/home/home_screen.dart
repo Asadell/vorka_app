@@ -21,14 +21,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Watch notifications if user is admin
-    final user = context.read<AuthProvider>().currentUser;
-    if (user != null && _isAdmin(user.organizations)) {
-      final orgId = user.activeOrganizationId;
-      if (orgId != null) {
-        context.read<NotificationProvider>().watchJoinRequests(orgId);
+    _initializeNotifications();
+  }
+
+  void _initializeNotifications() {
+    // PENTING: Check user dulu sebelum watch notifications
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authProvider = context.read<AuthProvider>();
+      final user = authProvider.currentUser;
+
+      // Only watch if user exists and is admin
+      if (user != null && _isAdmin(user.organizations)) {
+        final orgId = user.activeOrganizationId;
+        if (orgId != null) {
+          context.read<NotificationProvider>().watchJoinRequests(orgId);
+        }
       }
-    }
+    });
+  }
+
+  @override
+  void dispose() {
+    // PENTING: Stop listener saat dispose
+    // NotificationProvider harus punya method untuk cancel listener
+    super.dispose();
   }
 
   bool _isAdmin(List<UserOrganization> orgs) {
