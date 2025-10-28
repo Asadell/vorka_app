@@ -116,3 +116,58 @@ class TaskModel {
     };
   }
 }
+
+extension SubtaskModelExtension on SubtaskModel {
+  SubtaskModel copyWith({
+    String? id,
+    String? title,
+    bool? isCompleted,
+    String? completedBy,
+    DateTime? completedAt,
+  }) {
+    return SubtaskModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      isCompleted: isCompleted ?? this.isCompleted,
+      completedBy: completedBy ?? this.completedBy,
+      completedAt: completedAt ?? this.completedAt,
+    );
+  }
+}
+
+// TaskModel copyWith extension
+extension TaskModelExtension on TaskModel {
+  TaskModel copyWith({
+    String? id,
+    String? organizationId,
+    String? departmentId,
+    String? title,
+    String? description,
+    String? assignedTo,
+    List<String>? assigneeIds,
+    String? createdBy,
+    TaskPriority? priority,
+    TaskStatus? status,
+    DateTime? deadline,
+    List<SubtaskModel>? subtasks,
+    List<String>? attachments,
+    DateTime? createdAt,
+  }) {
+    return TaskModel(
+      id: id ?? this.id,
+      organizationId: organizationId ?? this.organizationId,
+      departmentId: departmentId ?? this.departmentId,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      assignedTo: assignedTo ?? this.assignedTo,
+      assigneeIds: assigneeIds ?? this.assigneeIds,
+      createdBy: createdBy ?? this.createdBy,
+      priority: priority ?? this.priority,
+      status: status ?? this.status,
+      deadline: deadline ?? this.deadline,
+      subtasks: subtasks ?? this.subtasks,
+      attachments: attachments ?? this.attachments,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+}

@@ -81,6 +81,29 @@ class TaskProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> deleteTask(String taskId) async {
+    try {
+      _isLoading = true;
+      _error = null;
+      notifyListeners();
+
+      // Call FirestoreService to delete task
+      await _firestoreService.deleteTask(taskId);
+
+      // Remove from local list
+      _tasks.removeWhere((task) => task.id == taskId);
+
+      _isLoading = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
   void clearError() {
     _error = null;
     notifyListeners();

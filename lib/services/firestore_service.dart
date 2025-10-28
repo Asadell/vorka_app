@@ -377,6 +377,17 @@ class FirestoreService {
     }
   }
 
+  Future<void> deleteTask(String taskId) async {
+    try {
+      await _firestore
+          .collection(FirebaseConstants.tasksCollection)
+          .doc(taskId)
+          .delete();
+    } catch (e) {
+      throw Exception('Delete task failed: $e');
+    }
+  }
+
   // ========================================
   // MEETING CRUD
   // ========================================

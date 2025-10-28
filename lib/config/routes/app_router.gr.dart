@@ -185,9 +185,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     TaskDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TaskDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const TaskDetailScreen(),
+        child: TaskDetailScreen(
+          key: args.key,
+          taskId: args.taskId,
+        ),
       );
     },
     TaskListRoute.name: (routeData) {
@@ -652,16 +656,40 @@ class StructureRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TaskDetailScreen]
-class TaskDetailRoute extends PageRouteInfo<void> {
-  const TaskDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class TaskDetailRoute extends PageRouteInfo<TaskDetailRouteArgs> {
+  TaskDetailRoute({
+    Key? key,
+    required String taskId,
+    List<PageRouteInfo>? children,
+  }) : super(
           TaskDetailRoute.name,
+          args: TaskDetailRouteArgs(
+            key: key,
+            taskId: taskId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'TaskDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<TaskDetailRouteArgs> page =
+      PageInfo<TaskDetailRouteArgs>(name);
+}
+
+class TaskDetailRouteArgs {
+  const TaskDetailRouteArgs({
+    this.key,
+    required this.taskId,
+  });
+
+  final Key? key;
+
+  final String taskId;
+
+  @override
+  String toString() {
+    return 'TaskDetailRouteArgs{key: $key, taskId: $taskId}';
+  }
 }
 
 /// generated route for
