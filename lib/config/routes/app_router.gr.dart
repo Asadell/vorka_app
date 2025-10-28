@@ -1,4 +1,3 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -10,6 +9,189 @@
 
 part of 'app_router.dart';
 
+abstract class _$AppRouter extends RootStackRouter {
+  // ignore: unused_element
+  _$AppRouter({super.navigatorKey});
+
+  @override
+  final Map<String, PageFactory> pagesMap = {
+    AddDepartmentsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddDepartmentsScreen(),
+      );
+    },
+    ChatPdfRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ChatPdfScreen(),
+      );
+    },
+    CreateMeetingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CreateMeetingScreen(),
+      );
+    },
+    CreateOrgRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CreateOrgScreen(),
+      );
+    },
+    CreateTaskRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CreateTaskScreen(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomeScreen(),
+      );
+    },
+    JoinByIdRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const JoinByIdScreen(),
+      );
+    },
+    JoinByQrRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const JoinByQrScreen(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LoginScreen(),
+      );
+    },
+    MainRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MainScreen(),
+      );
+    },
+    MeetingDetailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MeetingDetailScreen(),
+      );
+    },
+    MeetingListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MeetingListScreen(),
+      );
+    },
+    NotificationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const NotificationScreen(),
+      );
+    },
+    OnboardingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OnboardingScreen(),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfileScreen(),
+      );
+    },
+    ProkerDetailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProkerDetailScreen(),
+      );
+    },
+    ProkerListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProkerListScreen(),
+      );
+    },
+    QrAttendanceRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const QrAttendanceScreen(),
+      );
+    },
+    RegisterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterScreen(),
+      );
+    },
+    RequestDetailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RequestDetailScreen(),
+      );
+    },
+    SelectRoleRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SelectRoleScreen(),
+      );
+    },
+    Step1InfoRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Step1InfoScreen(),
+      );
+    },
+    Step2TimelineRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Step2TimelineScreen(),
+      );
+    },
+    Step3ApprovalRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Step3ApprovalScreen(),
+      );
+    },
+    Step4PreparationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Step4PreparationScreen(),
+      );
+    },
+    StructureRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const StructureScreen(),
+      );
+    },
+    TaskDetailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TaskDetailScreen(),
+      );
+    },
+    TaskListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TaskListScreen(),
+      );
+    },
+    WaitingApprovalRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const WaitingApprovalScreen(),
+      );
+    },
+  };
+}
+
 /// generated route for
 /// [AddDepartmentsScreen]
 class AddDepartmentsRoute extends PageRouteInfo<void> {
@@ -18,12 +200,7 @@ class AddDepartmentsRoute extends PageRouteInfo<void> {
 
   static const String name = 'AddDepartmentsRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const AddDepartmentsScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -34,12 +211,7 @@ class ChatPdfRoute extends PageRouteInfo<void> {
 
   static const String name = 'ChatPdfRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ChatPdfScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -50,12 +222,7 @@ class CreateMeetingRoute extends PageRouteInfo<void> {
 
   static const String name = 'CreateMeetingRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const CreateMeetingScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -66,12 +233,7 @@ class CreateOrgRoute extends PageRouteInfo<void> {
 
   static const String name = 'CreateOrgRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const CreateOrgScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -82,12 +244,7 @@ class CreateTaskRoute extends PageRouteInfo<void> {
 
   static const String name = 'CreateTaskRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const CreateTaskScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -98,12 +255,7 @@ class HomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const HomeScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -114,12 +266,7 @@ class JoinByIdRoute extends PageRouteInfo<void> {
 
   static const String name = 'JoinByIdRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const JoinByIdScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -130,12 +277,7 @@ class JoinByQrRoute extends PageRouteInfo<void> {
 
   static const String name = 'JoinByQrRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const JoinByQrScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -146,12 +288,7 @@ class LoginRoute extends PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const LoginScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -162,12 +299,7 @@ class MainRoute extends PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MainScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -178,12 +310,7 @@ class MeetingDetailRoute extends PageRouteInfo<void> {
 
   static const String name = 'MeetingDetailRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MeetingDetailScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -194,12 +321,7 @@ class MeetingListRoute extends PageRouteInfo<void> {
 
   static const String name = 'MeetingListRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MeetingListScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -210,12 +332,7 @@ class NotificationRoute extends PageRouteInfo<void> {
 
   static const String name = 'NotificationRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const NotificationScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -226,12 +343,7 @@ class OnboardingRoute extends PageRouteInfo<void> {
 
   static const String name = 'OnboardingRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const OnboardingScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -242,12 +354,7 @@ class ProfileRoute extends PageRouteInfo<void> {
 
   static const String name = 'ProfileRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ProfileScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -258,12 +365,7 @@ class ProkerDetailRoute extends PageRouteInfo<void> {
 
   static const String name = 'ProkerDetailRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ProkerDetailScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -274,12 +376,7 @@ class ProkerListRoute extends PageRouteInfo<void> {
 
   static const String name = 'ProkerListRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ProkerListScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -290,12 +387,7 @@ class QrAttendanceRoute extends PageRouteInfo<void> {
 
   static const String name = 'QrAttendanceRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const QrAttendanceScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -306,12 +398,7 @@ class RegisterRoute extends PageRouteInfo<void> {
 
   static const String name = 'RegisterRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const RegisterScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -322,12 +409,7 @@ class RequestDetailRoute extends PageRouteInfo<void> {
 
   static const String name = 'RequestDetailRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const RequestDetailScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -338,12 +420,7 @@ class SelectRoleRoute extends PageRouteInfo<void> {
 
   static const String name = 'SelectRoleRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const SelectRoleScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -354,12 +431,7 @@ class Step1InfoRoute extends PageRouteInfo<void> {
 
   static const String name = 'Step1InfoRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const Step1InfoScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -370,12 +442,7 @@ class Step2TimelineRoute extends PageRouteInfo<void> {
 
   static const String name = 'Step2TimelineRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const Step2TimelineScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -386,12 +453,7 @@ class Step3ApprovalRoute extends PageRouteInfo<void> {
 
   static const String name = 'Step3ApprovalRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const Step3ApprovalScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -402,12 +464,7 @@ class Step4PreparationRoute extends PageRouteInfo<void> {
 
   static const String name = 'Step4PreparationRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const Step4PreparationScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -418,12 +475,7 @@ class StructureRoute extends PageRouteInfo<void> {
 
   static const String name = 'StructureRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const StructureScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -434,12 +486,7 @@ class TaskDetailRoute extends PageRouteInfo<void> {
 
   static const String name = 'TaskDetailRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const TaskDetailScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -450,10 +497,16 @@ class TaskListRoute extends PageRouteInfo<void> {
 
   static const String name = 'TaskListRoute';
 
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const TaskListScreen();
-    },
-  );
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WaitingApprovalScreen]
+class WaitingApprovalRoute extends PageRouteInfo<void> {
+  const WaitingApprovalRoute({List<PageRouteInfo>? children})
+    : super(WaitingApprovalRoute.name, initialChildren: children);
+
+  static const String name = 'WaitingApprovalRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

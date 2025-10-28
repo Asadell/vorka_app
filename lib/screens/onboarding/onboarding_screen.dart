@@ -1,7 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
-
 @RoutePage()
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -13,11 +12,33 @@ class OnboardingScreen extends StatelessWidget {
         title: Text('O n b o a r d i n g S c r e e n'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-          'Screen: O n b o a r d i n g S c r e e n',
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text('Onboarding Screen', style: TextStyle(fontSize: 24)),
+          ),
+          ElevatedButton(
+            onPressed: () => context.router.pop(),
+            child: Text('Back to Login'),
+          ),
+          ElevatedButton(
+            onPressed: () => context.router.pop(),
+            child: Text('Back to Login'),
+          ),
+          ElevatedButton(
+            onPressed: () => context.router.pop(),
+            child: Text('Back to Login'),
+          ),
+          ElevatedButton(
+            onPressed: () => context.router.pop(),
+            child: Text('Back to Login'),
+          ),
+          ElevatedButton(
+            onPressed: () => context.router.pop(),
+            child: Text('Back to Login'),
+          ),
+        ],
       ),
     );
   }

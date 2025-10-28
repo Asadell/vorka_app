@@ -17,6 +17,7 @@ import 'package:vorka_app2/screens/onboarding/join_by_id_screen.dart';
 import 'package:vorka_app2/screens/onboarding/join_by_qr_screen.dart';
 import 'package:vorka_app2/screens/onboarding/onboarding_screen.dart';
 import 'package:vorka_app2/screens/onboarding/select_role_screen.dart';
+import 'package:vorka_app2/screens/onboarding/waiting_approval_screen.dart';
 import 'package:vorka_app2/screens/profile/profile_screen.dart';
 import 'package:vorka_app2/screens/proker/create_proker/step1_info_screen.dart';
 import 'package:vorka_app2/screens/proker/create_proker/step2_timeline_screen.dart';
@@ -32,9 +33,11 @@ import 'package:vorka_app2/screens/tasks/task_list_screen.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
-class AppRouter extends RootStackRouter {
+class AppRouter extends _$AppRouter {
+  AppRouter({super.navigatorKey});
+
   @override
-  List<AutoRoute> get routes => [
+  final List<AutoRoute> routes = [
     // ========================================
     // PUBLIC ROUTES (Tidak perlu login)
     // ========================================
@@ -46,39 +49,17 @@ class AppRouter extends RootStackRouter {
 
     // ========================================
     // PROTECTED ROUTES (Harus login dulu)
-    // Tambahkan guards: [AuthGuard()]
     // ========================================
+    AutoRoute(page: OnboardingRoute.page),
+    AutoRoute(page: CreateOrgRoute.page),
+    AutoRoute(page: AddDepartmentsRoute.page),
+    AutoRoute(page: JoinByIdRoute.page),
+    AutoRoute(page: JoinByQrRoute.page),
+    AutoRoute(page: SelectRoleRoute.page),
+    AutoRoute(page: WaitingApprovalRoute.page),
 
-    // Onboarding routes (protected)
-    AutoRoute(
-      page: OnboardingRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: CreateOrgRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: AddDepartmentsRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: JoinByIdRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: JoinByQrRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: SelectRoleRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-
-    // Main screen with bottom navigation (protected)
     AutoRoute(
       page: MainRoute.page,
-      guards: [AuthGuard()], // ← PROTECT SEMUA TABS
       children: [
         AutoRoute(page: HomeRoute.page, initial: true),
         AutoRoute(page: TaskListRoute.page),
@@ -88,62 +69,15 @@ class AppRouter extends RootStackRouter {
       ],
     ),
 
-    // All other screens (protected)
-    AutoRoute(
-      page: StructureRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: NotificationRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: RequestDetailRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: TaskDetailRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: CreateTaskRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: MeetingDetailRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: CreateMeetingRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: QrAttendanceRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    AutoRoute(
-      page: ProkerDetailRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
-    // AutoRoute(
-    //   page: CreateProkerStep1Route.page,
-    //   guards: [AuthGuard()], // ← PROTECT
-    // ),
-    // AutoRoute(
-    //   page: CreateProkerStep2Route.page,
-    //   guards: [AuthGuard()], // ← PROTECT
-    // ),
-    // AutoRoute(
-    //   page: CreateProkerStep3Route.page,
-    //   guards: [AuthGuard()], // ← PROTECT
-    // ),
-    // AutoRoute(
-    //   page: CreateProkerStep4Route.page,
-    //   guards: [AuthGuard()], // ← PROTECT
-    // ),
-    AutoRoute(
-      page: ChatPdfRoute.page,
-      guards: [AuthGuard()], // ← PROTECT
-    ),
+    AutoRoute(page: StructureRoute.page),
+    AutoRoute(page: NotificationRoute.page),
+    AutoRoute(page: RequestDetailRoute.page),
+    AutoRoute(page: TaskDetailRoute.page),
+    AutoRoute(page: CreateTaskRoute.page),
+    AutoRoute(page: MeetingDetailRoute.page),
+    AutoRoute(page: CreateMeetingRoute.page),
+    AutoRoute(page: QrAttendanceRoute.page),
+    AutoRoute(page: ProkerDetailRoute.page),
+    AutoRoute(page: ChatPdfRoute.page),
   ];
 }
