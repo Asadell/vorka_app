@@ -1,6 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-
+import 'package:vorka_app2/config/routes/app_router.dart';
 
 @RoutePage()
 class MeetingListScreen extends StatelessWidget {
@@ -9,15 +9,19 @@ class MeetingListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('M e e t i n g L i s t S c r e e n'),
-        centerTitle: true,
+      appBar: AppBar(title: const Text('Rapat')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // Meeting list
+          const Text('Meeting list here'),
+        ],
       ),
-      body: Center(
-        child: Text(
-          'Screen: M e e t i n g L i s t S c r e e n',
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.router.push(const CreateMeetingRoute());
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

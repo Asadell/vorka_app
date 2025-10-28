@@ -16,11 +16,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'VORKA',
-      theme: AppTheme.lightTheme,
-      debugShowCheckedModeBanner: false,
-      routerConfig: _appRouter.config(),
+    return Consumer<AuthProvider>(
+      builder: (context, authProvider, _) {
+        return MaterialApp.router(
+          title: 'VORKA',
+          theme: AppTheme.lightTheme,
+          debugShowCheckedModeBanner: false,
+          routerConfig: _appRouter.config(
+            // Optional: Navigate to MainScreen if authenticated
+            reevaluateListenable: authProvider,
+          ),
+        );
+      },
     );
   }
 }

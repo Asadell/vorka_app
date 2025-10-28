@@ -1,7 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
-
 @RoutePage()
 class ProkerListScreen extends StatelessWidget {
   const ProkerListScreen({super.key});
@@ -9,15 +8,19 @@ class ProkerListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('P r o k e r L i s t S c r e e n'),
-        centerTitle: true,
+      appBar: AppBar(title: const Text('Program Kerja')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // Proker list
+          const Text('Proker list here'),
+        ],
       ),
-      body: Center(
-        child: Text(
-          'Screen: P r o k e r L i s t S c r e e n',
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // context.router.push();
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

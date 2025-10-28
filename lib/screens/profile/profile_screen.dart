@@ -1,7 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
-
 @RoutePage()
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,15 +8,13 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('P r o f i l e S c r e e n'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          'Screen: P r o f i l e S c r e e n',
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+      appBar: AppBar(title: const Text('Profil')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // User info, stats, calendar
+          const Text('Profile here'),
+        ],
       ),
     );
   }

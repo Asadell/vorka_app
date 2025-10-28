@@ -8,7 +8,6 @@ import 'package:vorka_app2/providers/task_provider.dart';
 import 'package:vorka_app2/providers/meeting_provider.dart';
 import 'package:vorka_app2/providers/proker_provider.dart';
 import 'package:vorka_app2/providers/notification_provider.dart';
-import 'package:vorka_app2/core/utils/notification_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
