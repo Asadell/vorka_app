@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:vorka_app2/config/routes/auth_guard.dart';
+import 'package:vorka_app2/models/join_request_model.dart';
+import 'package:vorka_app2/models/organization_model.dart';
 import 'package:vorka_app2/screens/auth/login_screen.dart';
 import 'package:vorka_app2/screens/auth/register_screen.dart';
 import 'package:vorka_app2/screens/chat_pdf/chat_pdf_screen.dart';
@@ -38,18 +41,12 @@ class AppRouter extends _$AppRouter {
 
   @override
   final List<AutoRoute> routes = [
-    // ========================================
-    // PUBLIC ROUTES (Tidak perlu login)
-    // ========================================
     AutoRoute(
       page: LoginRoute.page,
       initial: true, // Initial route
     ),
     AutoRoute(page: RegisterRoute.page),
 
-    // ========================================
-    // PROTECTED ROUTES (Harus login dulu)
-    // ========================================
     AutoRoute(page: OnboardingRoute.page),
     AutoRoute(page: CreateOrgRoute.page),
     AutoRoute(page: AddDepartmentsRoute.page),
