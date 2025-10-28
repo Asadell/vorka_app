@@ -18,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool _hasShownIndexWarning = false;
+
   @override
   void initState() {
     super.initState();
@@ -25,15 +27,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _initializeNotifications() {
-    // PENTING: Check user dulu sebelum watch notifications
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
       final authProvider = context.read<AuthProvider>();
       final user = authProvider.currentUser;
 
       // Only watch if user exists and is admin
       if (user != null && _isAdmin(user.organizations)) {
         final orgId = user.activeOrganizationId;
-        if (orgId != null) {
+        if (orgId != null && orgId.isNotEmpty) {
           context.read<NotificationProvider>().watchJoinRequests(orgId);
         }
       }
@@ -42,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // PENTING: Stop listener saat dispose
-    // NotificationProvider harus punya method untuk cancel listener
+    // Stop watching when screen is disposed
+    context.read<NotificationProvider>().stopWatching();
     super.dispose();
   }
 
@@ -61,6 +64,49 @@ class _HomeScreenState extends State<HomeScreen> {
     ].contains(activeOrg.role);
   }
 
+  void _showIndexWarningDialog() {
+    if (_hasShownIndexWarning) return;
+    _hasShownIndexWarning = true;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.warning_amber_rounded, color: Colors.orange),
+            SizedBox(width: 8),
+            Text('Setup Diperlukan'),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Firebase Index belum dibuat.',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 12),
+            Text('Fitur notifikasi tidak akan berfungsi sampai index dibuat.'),
+            SizedBox(height: 12),
+            Text('Langkah:', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('1. Buka Firebase Console'),
+            Text('2. Firestore → Indexes'),
+            Text('3. Klik link di console log'),
+            Text('4. Create Index (tunggu 2-5 menit)'),
+            Text('5. Restart aplikasi'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Mengerti'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,16 +116,36 @@ class _HomeScreenState extends State<HomeScreen> {
           // Notifications for admin
           Consumer<NotificationProvider>(
             builder: (context, notif, _) {
+              // Show warning dialog if index error (only once)
+              if (notif.error == 'INDEX_NOT_READY' && !_hasShownIndexWarning) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _showIndexWarningDialog();
+                });
+              }
+
               final count = notif.pendingCount;
+              final hasIndexError = notif.error == 'INDEX_NOT_READY';
+
               return Stack(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined),
+                    icon: Icon(
+                      hasIndexError
+                          ? Icons.notifications_off_outlined
+                          : Icons.notifications_outlined,
+                    ),
                     onPressed: () {
-                      context.router.push(const NotificationRoute());
+                      if (hasIndexError) {
+                        _showIndexWarningDialog();
+                      } else {
+                        context.router.push(const NotificationRoute());
+                      }
                     },
+                    tooltip: hasIndexError
+                        ? 'Notifikasi tidak aktif (Index diperlukan)'
+                        : 'Lihat notifikasi',
                   ),
-                  if (count > 0)
+                  if (count > 0 && !hasIndexError)
                     Positioned(
                       right: 8,
                       top: 8,
@@ -96,6 +162,31 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                           count.toString(),
                           style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  if (hasIndexError)
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.orange,
+                          shape: BoxShape.circle,
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        child: const Text(
+                          '!',
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -168,6 +259,58 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: AppSizes.paddingL),
 
+                // Index Warning Banner (if error)
+                Consumer<NotificationProvider>(
+                  builder: (context, notif, _) {
+                    if (notif.error != 'INDEX_NOT_READY') {
+                      return const SizedBox.shrink();
+                    }
+
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: AppSizes.paddingL),
+                      padding: const EdgeInsets.all(AppSizes.paddingM),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade50,
+                        borderRadius: BorderRadius.circular(AppSizes.radiusM),
+                        border: Border.all(color: Colors.orange.shade200),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.warning_amber_rounded,
+                            color: Colors.orange.shade700,
+                          ),
+                          const SizedBox(width: AppSizes.paddingM),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Setup Firebase Index',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.orange.shade900,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Notifikasi belum aktif. Tap untuk info.',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.info_outline),
+                            color: Colors.orange.shade700,
+                            onPressed: _showIndexWarningDialog,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+
                 // Quick Stats
                 Text(
                   'Ringkasan',
@@ -212,10 +355,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: Consumer<NotificationProvider>(
                         builder: (context, notif, _) {
+                          final hasError = notif.error == 'INDEX_NOT_READY';
                           return _StatCard(
-                            icon: Icons.pending_actions,
-                            label: 'Pending',
-                            count: notif.pendingCount.toString(),
+                            icon: hasError
+                                ? Icons.pending_actions_outlined
+                                : Icons.pending_actions,
+                            label: hasError ? 'Pending*' : 'Pending',
+                            count: hasError
+                                ? '-'
+                                : notif.pendingCount.toString(),
                             color: Colors.red,
                           );
                         },

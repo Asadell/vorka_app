@@ -39,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     // Check password match
     if (_passwordController.text != _confirmPasswordController.text) {
+      if (!mounted) return; // Check if widget is still mounted
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Password tidak cocok'),
@@ -59,10 +60,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       name: _nameController.text.trim(),
     );
 
-    if (!mounted) return;
+    if (!mounted) return; // Ensure the widget is mounted
 
     if (success) {
       // Registration successful, show success message
+      if (!mounted)
+        return; // Ensure the widget is mounted before showing a SnackBar
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Registrasi berhasil! Silakan lengkapi profil Anda'),
@@ -74,13 +77,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Wait a bit for the message to show, then navigate
       await Future.delayed(const Duration(milliseconds: 500));
 
-      if (!mounted) return;
+      if (!mounted) return; // Ensure the widget is mounted before navigation
 
       // After register, go to onboarding
       context.router.replace(const OnboardingRoute());
     } else {
       // Show error
       if (authProvider.error != null) {
+        if (!mounted)
+          return; // Ensure the widget is mounted before showing the SnackBar
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(_parseFirebaseError(authProvider.error!)),

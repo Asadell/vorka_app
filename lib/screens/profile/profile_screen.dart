@@ -118,19 +118,12 @@ class ProfileScreen extends StatelessWidget {
     );
 
     try {
+      // IMPORTANT: Stop notification listener first
+      final notifProvider = context.read<NotificationProvider>();
+      notifProvider.stopWatching();
+
+      // Then sign out
       final authProvider = context.read<AuthProvider>();
-
-      // IMPORTANT: Stop all listeners before logout
-      // Stop notification provider listener
-      try {
-        final notifProvider = context.read<NotificationProvider>();
-        // Cancel any active listeners (if provider has dispose method)
-        notifProvider.clearError();
-      } catch (e) {
-        // Provider might not exist, ignore
-      }
-
-      // Sign out
       await authProvider.signOut();
 
       if (!context.mounted) return;
@@ -138,12 +131,12 @@ class ProfileScreen extends StatelessWidget {
       // Close loading dialog
       Navigator.of(context).pop();
 
-      // Small delay to ensure sign out is complete
+      // Small delay
       await Future.delayed(const Duration(milliseconds: 300));
 
       if (!context.mounted) return;
 
-      // Navigate to login (replace all routes to clear stack)
+      // Navigate to login
       context.router.replaceAll([const LoginRoute()]);
     } catch (e) {
       if (!context.mounted) return;

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:vorka_app2/core/constants/enums.dart';
 import 'package:vorka_app2/models/join_request_model.dart';
@@ -9,6 +10,7 @@ class NotificationProvider extends ChangeNotifier {
   List<JoinRequestModel> _joinRequests = [];
   bool _isLoading = false;
   String? _error;
+  StreamSubscription? _requestsSubscription;
 
   List<JoinRequestModel> get joinRequests => _joinRequests;
   bool get isLoading => _isLoading;
@@ -16,20 +18,62 @@ class NotificationProvider extends ChangeNotifier {
   int get pendingCount => _joinRequests.length;
 
   void watchJoinRequests(String orgId) {
-    _firestoreService
-        .watchJoinRequests(orgId)
-        .listen(
-          (requests) {
-            _joinRequests = requests;
-            _isLoading = false;
-            notifyListeners();
-          },
-          onError: (error) {
-            _error = error.toString();
-            _isLoading = false;
-            notifyListeners();
-          },
-        );
+    // Cancel previous subscription if exists
+    _requestsSubscription?.cancel();
+
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      _requestsSubscription = _firestoreService
+          .watchJoinRequests(orgId)
+          .listen(
+            (requests) {
+              _joinRequests = requests;
+              _isLoading = false;
+              _error = null;
+              notifyListeners();
+            },
+            onError: (error) {
+              // IMPORTANT: Handle Firestore index error gracefully
+              if (error.toString().contains('FAILED_PRECONDITION') ||
+                  error.toString().contains('index')) {
+                // Index not created yet - set empty list and show warning
+                _joinRequests = [];
+                _error = 'INDEX_NOT_READY';
+                _isLoading = false;
+
+                // Log for debugging
+                debugPrint(
+                  '⚠️ Firestore Index not ready. Please create index in Firebase Console.',
+                );
+                debugPrint('📋 Collection: join_requests');
+                debugPrint(
+                  '📋 Fields: organizationId (Asc), status (Asc), createdAt (Desc)',
+                );
+              } else {
+                // Other errors
+                _error = error.toString();
+                _isLoading = false;
+              }
+              notifyListeners();
+            },
+          );
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // Stop watching (call this on logout or dispose)
+  void stopWatching() {
+    _requestsSubscription?.cancel();
+    _requestsSubscription = null;
+    _joinRequests = [];
+    _error = null;
+    notifyListeners();
   }
 
   Future<bool> createJoinRequest({
@@ -112,5 +156,11 @@ class NotificationProvider extends ChangeNotifier {
   void clearError() {
     _error = null;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _requestsSubscription?.cancel();
+    super.dispose();
   }
 }
