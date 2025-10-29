@@ -84,10 +84,7 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<MeetingDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: MeetingDetailScreen(
-          key: args.key,
-          meetingId: args.meetingId,
-        ),
+        child: MeetingDetailScreen(key: args.key, meetingId: args.meetingId),
       );
     },
     MeetingListRoute.name: (routeData) {
@@ -115,9 +112,10 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ProkerDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<ProkerDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ProkerDetailScreen(),
+        child: ProkerDetailScreen(key: args.key, prokerId: args.prokerId),
       );
     },
     ProkerListRoute.name: (routeData) {
@@ -130,10 +128,7 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<QrAttendanceRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: QrAttendanceScreen(
-          key: args.key,
-          meetingId: args.meetingId,
-        ),
+        child: QrAttendanceScreen(key: args.key, meetingId: args.meetingId),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -146,20 +141,14 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<RequestDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: RequestDetailScreen(
-          key: args.key,
-          request: args.request,
-        ),
+        child: RequestDetailScreen(key: args.key, request: args.request),
       );
     },
     SelectRoleRoute.name: (routeData) {
       final args = routeData.argsAs<SelectRoleRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: SelectRoleScreen(
-          key: args.key,
-          organization: args.organization,
-        ),
+        child: SelectRoleScreen(key: args.key, organization: args.organization),
       );
     },
     Step1InfoRoute.name: (routeData) {
@@ -169,21 +158,49 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     Step2TimelineRoute.name: (routeData) {
+      final args = routeData.argsAs<Step2TimelineRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const Step2TimelineScreen(),
+        child: Step2TimelineScreen(
+          key: args.key,
+          title: args.title,
+          description: args.description,
+          departmentIds: args.departmentIds,
+          posterFile: args.posterFile,
+        ),
       );
     },
     Step3ApprovalRoute.name: (routeData) {
+      final args = routeData.argsAs<Step3ApprovalRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const Step3ApprovalScreen(),
+        child: Step3ApprovalScreen(
+          key: args.key,
+          title: args.title,
+          description: args.description,
+          departmentIds: args.departmentIds,
+          posterFile: args.posterFile,
+          planningStart: args.planningStart,
+          planningEnd: args.planningEnd,
+          executionDate: args.executionDate,
+        ),
       );
     },
     Step4PreparationRoute.name: (routeData) {
+      final args = routeData.argsAs<Step4PreparationRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const Step4PreparationScreen(),
+        child: Step4PreparationScreen(
+          key: args.key,
+          title: args.title,
+          description: args.description,
+          departmentIds: args.departmentIds,
+          posterFile: args.posterFile,
+          planningStart: args.planningStart,
+          planningEnd: args.planningEnd,
+          executionDate: args.executionDate,
+          approvals: args.approvals,
+        ),
       );
     },
     StructureRoute.name: (routeData) {
@@ -196,10 +213,7 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<TaskDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: TaskDetailScreen(
-          key: args.key,
-          taskId: args.taskId,
-        ),
+        child: TaskDetailScreen(key: args.key, taskId: args.taskId),
       );
     },
     TaskListRoute.name: (routeData) {
@@ -230,14 +244,14 @@ class AddDepartmentsRoute extends PageRouteInfo<AddDepartmentsRouteArgs> {
     required String orgDescription,
     List<PageRouteInfo>? children,
   }) : super(
-          AddDepartmentsRoute.name,
-          args: AddDepartmentsRouteArgs(
-            key: key,
-            orgName: orgName,
-            orgDescription: orgDescription,
-          ),
-          initialChildren: children,
-        );
+         AddDepartmentsRoute.name,
+         args: AddDepartmentsRouteArgs(
+           key: key,
+           orgName: orgName,
+           orgDescription: orgDescription,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'AddDepartmentsRoute';
 
@@ -268,10 +282,7 @@ class AddDepartmentsRouteArgs {
 /// [ChatPdfScreen]
 class ChatPdfRoute extends PageRouteInfo<void> {
   const ChatPdfRoute({List<PageRouteInfo>? children})
-      : super(
-          ChatPdfRoute.name,
-          initialChildren: children,
-        );
+    : super(ChatPdfRoute.name, initialChildren: children);
 
   static const String name = 'ChatPdfRoute';
 
@@ -282,10 +293,7 @@ class ChatPdfRoute extends PageRouteInfo<void> {
 /// [CreateMeetingScreen]
 class CreateMeetingRoute extends PageRouteInfo<void> {
   const CreateMeetingRoute({List<PageRouteInfo>? children})
-      : super(
-          CreateMeetingRoute.name,
-          initialChildren: children,
-        );
+    : super(CreateMeetingRoute.name, initialChildren: children);
 
   static const String name = 'CreateMeetingRoute';
 
@@ -296,10 +304,7 @@ class CreateMeetingRoute extends PageRouteInfo<void> {
 /// [CreateOrgScreen]
 class CreateOrgRoute extends PageRouteInfo<void> {
   const CreateOrgRoute({List<PageRouteInfo>? children})
-      : super(
-          CreateOrgRoute.name,
-          initialChildren: children,
-        );
+    : super(CreateOrgRoute.name, initialChildren: children);
 
   static const String name = 'CreateOrgRoute';
 
@@ -310,10 +315,7 @@ class CreateOrgRoute extends PageRouteInfo<void> {
 /// [CreateTaskScreen]
 class CreateTaskRoute extends PageRouteInfo<void> {
   const CreateTaskRoute({List<PageRouteInfo>? children})
-      : super(
-          CreateTaskRoute.name,
-          initialChildren: children,
-        );
+    : super(CreateTaskRoute.name, initialChildren: children);
 
   static const String name = 'CreateTaskRoute';
 
@@ -324,10 +326,7 @@ class CreateTaskRoute extends PageRouteInfo<void> {
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
+    : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
@@ -338,10 +337,7 @@ class HomeRoute extends PageRouteInfo<void> {
 /// [JoinByIdScreen]
 class JoinByIdRoute extends PageRouteInfo<void> {
   const JoinByIdRoute({List<PageRouteInfo>? children})
-      : super(
-          JoinByIdRoute.name,
-          initialChildren: children,
-        );
+    : super(JoinByIdRoute.name, initialChildren: children);
 
   static const String name = 'JoinByIdRoute';
 
@@ -352,10 +348,7 @@ class JoinByIdRoute extends PageRouteInfo<void> {
 /// [JoinByQrScreen]
 class JoinByQrRoute extends PageRouteInfo<void> {
   const JoinByQrRoute({List<PageRouteInfo>? children})
-      : super(
-          JoinByQrRoute.name,
-          initialChildren: children,
-        );
+    : super(JoinByQrRoute.name, initialChildren: children);
 
   static const String name = 'JoinByQrRoute';
 
@@ -366,10 +359,7 @@ class JoinByQrRoute extends PageRouteInfo<void> {
 /// [LoginScreen]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
-      : super(
-          LoginRoute.name,
-          initialChildren: children,
-        );
+    : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
@@ -380,10 +370,7 @@ class LoginRoute extends PageRouteInfo<void> {
 /// [MainScreen]
 class MainRoute extends PageRouteInfo<void> {
   const MainRoute({List<PageRouteInfo>? children})
-      : super(
-          MainRoute.name,
-          initialChildren: children,
-        );
+    : super(MainRoute.name, initialChildren: children);
 
   static const String name = 'MainRoute';
 
@@ -398,13 +385,10 @@ class MeetingDetailRoute extends PageRouteInfo<MeetingDetailRouteArgs> {
     required String meetingId,
     List<PageRouteInfo>? children,
   }) : super(
-          MeetingDetailRoute.name,
-          args: MeetingDetailRouteArgs(
-            key: key,
-            meetingId: meetingId,
-          ),
-          initialChildren: children,
-        );
+         MeetingDetailRoute.name,
+         args: MeetingDetailRouteArgs(key: key, meetingId: meetingId),
+         initialChildren: children,
+       );
 
   static const String name = 'MeetingDetailRoute';
 
@@ -413,10 +397,7 @@ class MeetingDetailRoute extends PageRouteInfo<MeetingDetailRouteArgs> {
 }
 
 class MeetingDetailRouteArgs {
-  const MeetingDetailRouteArgs({
-    this.key,
-    required this.meetingId,
-  });
+  const MeetingDetailRouteArgs({this.key, required this.meetingId});
 
   final Key? key;
 
@@ -432,10 +413,7 @@ class MeetingDetailRouteArgs {
 /// [MeetingListScreen]
 class MeetingListRoute extends PageRouteInfo<void> {
   const MeetingListRoute({List<PageRouteInfo>? children})
-      : super(
-          MeetingListRoute.name,
-          initialChildren: children,
-        );
+    : super(MeetingListRoute.name, initialChildren: children);
 
   static const String name = 'MeetingListRoute';
 
@@ -446,10 +424,7 @@ class MeetingListRoute extends PageRouteInfo<void> {
 /// [NotificationScreen]
 class NotificationRoute extends PageRouteInfo<void> {
   const NotificationRoute({List<PageRouteInfo>? children})
-      : super(
-          NotificationRoute.name,
-          initialChildren: children,
-        );
+    : super(NotificationRoute.name, initialChildren: children);
 
   static const String name = 'NotificationRoute';
 
@@ -460,10 +435,7 @@ class NotificationRoute extends PageRouteInfo<void> {
 /// [OnboardingScreen]
 class OnboardingRoute extends PageRouteInfo<void> {
   const OnboardingRoute({List<PageRouteInfo>? children})
-      : super(
-          OnboardingRoute.name,
-          initialChildren: children,
-        );
+    : super(OnboardingRoute.name, initialChildren: children);
 
   static const String name = 'OnboardingRoute';
 
@@ -474,10 +446,7 @@ class OnboardingRoute extends PageRouteInfo<void> {
 /// [ProfileScreen]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute({List<PageRouteInfo>? children})
-      : super(
-          ProfileRoute.name,
-          initialChildren: children,
-        );
+    : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
@@ -486,26 +455,41 @@ class ProfileRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ProkerDetailScreen]
-class ProkerDetailRoute extends PageRouteInfo<void> {
-  const ProkerDetailRoute({List<PageRouteInfo>? children})
-      : super(
-          ProkerDetailRoute.name,
-          initialChildren: children,
-        );
+class ProkerDetailRoute extends PageRouteInfo<ProkerDetailRouteArgs> {
+  ProkerDetailRoute({
+    Key? key,
+    required String prokerId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ProkerDetailRoute.name,
+         args: ProkerDetailRouteArgs(key: key, prokerId: prokerId),
+         initialChildren: children,
+       );
 
   static const String name = 'ProkerDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ProkerDetailRouteArgs> page =
+      PageInfo<ProkerDetailRouteArgs>(name);
+}
+
+class ProkerDetailRouteArgs {
+  const ProkerDetailRouteArgs({this.key, required this.prokerId});
+
+  final Key? key;
+
+  final String prokerId;
+
+  @override
+  String toString() {
+    return 'ProkerDetailRouteArgs{key: $key, prokerId: $prokerId}';
+  }
 }
 
 /// generated route for
 /// [ProkerListScreen]
 class ProkerListRoute extends PageRouteInfo<void> {
   const ProkerListRoute({List<PageRouteInfo>? children})
-      : super(
-          ProkerListRoute.name,
-          initialChildren: children,
-        );
+    : super(ProkerListRoute.name, initialChildren: children);
 
   static const String name = 'ProkerListRoute';
 
@@ -520,13 +504,10 @@ class QrAttendanceRoute extends PageRouteInfo<QrAttendanceRouteArgs> {
     required String meetingId,
     List<PageRouteInfo>? children,
   }) : super(
-          QrAttendanceRoute.name,
-          args: QrAttendanceRouteArgs(
-            key: key,
-            meetingId: meetingId,
-          ),
-          initialChildren: children,
-        );
+         QrAttendanceRoute.name,
+         args: QrAttendanceRouteArgs(key: key, meetingId: meetingId),
+         initialChildren: children,
+       );
 
   static const String name = 'QrAttendanceRoute';
 
@@ -535,10 +516,7 @@ class QrAttendanceRoute extends PageRouteInfo<QrAttendanceRouteArgs> {
 }
 
 class QrAttendanceRouteArgs {
-  const QrAttendanceRouteArgs({
-    this.key,
-    required this.meetingId,
-  });
+  const QrAttendanceRouteArgs({this.key, required this.meetingId});
 
   final Key? key;
 
@@ -554,10 +532,7 @@ class QrAttendanceRouteArgs {
 /// [RegisterScreen]
 class RegisterRoute extends PageRouteInfo<void> {
   const RegisterRoute({List<PageRouteInfo>? children})
-      : super(
-          RegisterRoute.name,
-          initialChildren: children,
-        );
+    : super(RegisterRoute.name, initialChildren: children);
 
   static const String name = 'RegisterRoute';
 
@@ -572,13 +547,10 @@ class RequestDetailRoute extends PageRouteInfo<RequestDetailRouteArgs> {
     required JoinRequestModel request,
     List<PageRouteInfo>? children,
   }) : super(
-          RequestDetailRoute.name,
-          args: RequestDetailRouteArgs(
-            key: key,
-            request: request,
-          ),
-          initialChildren: children,
-        );
+         RequestDetailRoute.name,
+         args: RequestDetailRouteArgs(key: key, request: request),
+         initialChildren: children,
+       );
 
   static const String name = 'RequestDetailRoute';
 
@@ -587,10 +559,7 @@ class RequestDetailRoute extends PageRouteInfo<RequestDetailRouteArgs> {
 }
 
 class RequestDetailRouteArgs {
-  const RequestDetailRouteArgs({
-    this.key,
-    required this.request,
-  });
+  const RequestDetailRouteArgs({this.key, required this.request});
 
   final Key? key;
 
@@ -610,13 +579,10 @@ class SelectRoleRoute extends PageRouteInfo<SelectRoleRouteArgs> {
     required OrganizationModel organization,
     List<PageRouteInfo>? children,
   }) : super(
-          SelectRoleRoute.name,
-          args: SelectRoleRouteArgs(
-            key: key,
-            organization: organization,
-          ),
-          initialChildren: children,
-        );
+         SelectRoleRoute.name,
+         args: SelectRoleRouteArgs(key: key, organization: organization),
+         initialChildren: children,
+       );
 
   static const String name = 'SelectRoleRoute';
 
@@ -625,10 +591,7 @@ class SelectRoleRoute extends PageRouteInfo<SelectRoleRouteArgs> {
 }
 
 class SelectRoleRouteArgs {
-  const SelectRoleRouteArgs({
-    this.key,
-    required this.organization,
-  });
+  const SelectRoleRouteArgs({this.key, required this.organization});
 
   final Key? key;
 
@@ -644,10 +607,7 @@ class SelectRoleRouteArgs {
 /// [Step1InfoScreen]
 class Step1InfoRoute extends PageRouteInfo<void> {
   const Step1InfoRoute({List<PageRouteInfo>? children})
-      : super(
-          Step1InfoRoute.name,
-          initialChildren: children,
-        );
+    : super(Step1InfoRoute.name, initialChildren: children);
 
   static const String name = 'Step1InfoRoute';
 
@@ -656,54 +616,203 @@ class Step1InfoRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [Step2TimelineScreen]
-class Step2TimelineRoute extends PageRouteInfo<void> {
-  const Step2TimelineRoute({List<PageRouteInfo>? children})
-      : super(
-          Step2TimelineRoute.name,
-          initialChildren: children,
-        );
+class Step2TimelineRoute extends PageRouteInfo<Step2TimelineRouteArgs> {
+  Step2TimelineRoute({
+    Key? key,
+    required String title,
+    required String description,
+    required List<String> departmentIds,
+    File? posterFile,
+    List<PageRouteInfo>? children,
+  }) : super(
+         Step2TimelineRoute.name,
+         args: Step2TimelineRouteArgs(
+           key: key,
+           title: title,
+           description: description,
+           departmentIds: departmentIds,
+           posterFile: posterFile,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'Step2TimelineRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<Step2TimelineRouteArgs> page =
+      PageInfo<Step2TimelineRouteArgs>(name);
+}
+
+class Step2TimelineRouteArgs {
+  const Step2TimelineRouteArgs({
+    this.key,
+    required this.title,
+    required this.description,
+    required this.departmentIds,
+    this.posterFile,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final String description;
+
+  final List<String> departmentIds;
+
+  final File? posterFile;
+
+  @override
+  String toString() {
+    return 'Step2TimelineRouteArgs{key: $key, title: $title, description: $description, departmentIds: $departmentIds, posterFile: $posterFile}';
+  }
 }
 
 /// generated route for
 /// [Step3ApprovalScreen]
-class Step3ApprovalRoute extends PageRouteInfo<void> {
-  const Step3ApprovalRoute({List<PageRouteInfo>? children})
-      : super(
-          Step3ApprovalRoute.name,
-          initialChildren: children,
-        );
+class Step3ApprovalRoute extends PageRouteInfo<Step3ApprovalRouteArgs> {
+  Step3ApprovalRoute({
+    Key? key,
+    required String title,
+    required String description,
+    required List<String> departmentIds,
+    File? posterFile,
+    required DateTime planningStart,
+    required DateTime planningEnd,
+    required DateTime executionDate,
+    List<PageRouteInfo>? children,
+  }) : super(
+         Step3ApprovalRoute.name,
+         args: Step3ApprovalRouteArgs(
+           key: key,
+           title: title,
+           description: description,
+           departmentIds: departmentIds,
+           posterFile: posterFile,
+           planningStart: planningStart,
+           planningEnd: planningEnd,
+           executionDate: executionDate,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'Step3ApprovalRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<Step3ApprovalRouteArgs> page =
+      PageInfo<Step3ApprovalRouteArgs>(name);
+}
+
+class Step3ApprovalRouteArgs {
+  const Step3ApprovalRouteArgs({
+    this.key,
+    required this.title,
+    required this.description,
+    required this.departmentIds,
+    this.posterFile,
+    required this.planningStart,
+    required this.planningEnd,
+    required this.executionDate,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final String description;
+
+  final List<String> departmentIds;
+
+  final File? posterFile;
+
+  final DateTime planningStart;
+
+  final DateTime planningEnd;
+
+  final DateTime executionDate;
+
+  @override
+  String toString() {
+    return 'Step3ApprovalRouteArgs{key: $key, title: $title, description: $description, departmentIds: $departmentIds, posterFile: $posterFile, planningStart: $planningStart, planningEnd: $planningEnd, executionDate: $executionDate}';
+  }
 }
 
 /// generated route for
 /// [Step4PreparationScreen]
-class Step4PreparationRoute extends PageRouteInfo<void> {
-  const Step4PreparationRoute({List<PageRouteInfo>? children})
-      : super(
-          Step4PreparationRoute.name,
-          initialChildren: children,
-        );
+class Step4PreparationRoute extends PageRouteInfo<Step4PreparationRouteArgs> {
+  Step4PreparationRoute({
+    Key? key,
+    required String title,
+    required String description,
+    required List<String> departmentIds,
+    File? posterFile,
+    required DateTime planningStart,
+    required DateTime planningEnd,
+    required DateTime executionDate,
+    required List<ApprovalModel> approvals,
+    List<PageRouteInfo>? children,
+  }) : super(
+         Step4PreparationRoute.name,
+         args: Step4PreparationRouteArgs(
+           key: key,
+           title: title,
+           description: description,
+           departmentIds: departmentIds,
+           posterFile: posterFile,
+           planningStart: planningStart,
+           planningEnd: planningEnd,
+           executionDate: executionDate,
+           approvals: approvals,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'Step4PreparationRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<Step4PreparationRouteArgs> page =
+      PageInfo<Step4PreparationRouteArgs>(name);
+}
+
+class Step4PreparationRouteArgs {
+  const Step4PreparationRouteArgs({
+    this.key,
+    required this.title,
+    required this.description,
+    required this.departmentIds,
+    this.posterFile,
+    required this.planningStart,
+    required this.planningEnd,
+    required this.executionDate,
+    required this.approvals,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final String description;
+
+  final List<String> departmentIds;
+
+  final File? posterFile;
+
+  final DateTime planningStart;
+
+  final DateTime planningEnd;
+
+  final DateTime executionDate;
+
+  final List<ApprovalModel> approvals;
+
+  @override
+  String toString() {
+    return 'Step4PreparationRouteArgs{key: $key, title: $title, description: $description, departmentIds: $departmentIds, posterFile: $posterFile, planningStart: $planningStart, planningEnd: $planningEnd, executionDate: $executionDate, approvals: $approvals}';
+  }
 }
 
 /// generated route for
 /// [StructureScreen]
 class StructureRoute extends PageRouteInfo<void> {
   const StructureRoute({List<PageRouteInfo>? children})
-      : super(
-          StructureRoute.name,
-          initialChildren: children,
-        );
+    : super(StructureRoute.name, initialChildren: children);
 
   static const String name = 'StructureRoute';
 
@@ -718,13 +827,10 @@ class TaskDetailRoute extends PageRouteInfo<TaskDetailRouteArgs> {
     required String taskId,
     List<PageRouteInfo>? children,
   }) : super(
-          TaskDetailRoute.name,
-          args: TaskDetailRouteArgs(
-            key: key,
-            taskId: taskId,
-          ),
-          initialChildren: children,
-        );
+         TaskDetailRoute.name,
+         args: TaskDetailRouteArgs(key: key, taskId: taskId),
+         initialChildren: children,
+       );
 
   static const String name = 'TaskDetailRoute';
 
@@ -733,10 +839,7 @@ class TaskDetailRoute extends PageRouteInfo<TaskDetailRouteArgs> {
 }
 
 class TaskDetailRouteArgs {
-  const TaskDetailRouteArgs({
-    this.key,
-    required this.taskId,
-  });
+  const TaskDetailRouteArgs({this.key, required this.taskId});
 
   final Key? key;
 
@@ -752,10 +855,7 @@ class TaskDetailRouteArgs {
 /// [TaskListScreen]
 class TaskListRoute extends PageRouteInfo<void> {
   const TaskListRoute({List<PageRouteInfo>? children})
-      : super(
-          TaskListRoute.name,
-          initialChildren: children,
-        );
+    : super(TaskListRoute.name, initialChildren: children);
 
   static const String name = 'TaskListRoute';
 
@@ -770,13 +870,13 @@ class WaitingApprovalRoute extends PageRouteInfo<WaitingApprovalRouteArgs> {
     required String organizationName,
     List<PageRouteInfo>? children,
   }) : super(
-          WaitingApprovalRoute.name,
-          args: WaitingApprovalRouteArgs(
-            key: key,
-            organizationName: organizationName,
-          ),
-          initialChildren: children,
-        );
+         WaitingApprovalRoute.name,
+         args: WaitingApprovalRouteArgs(
+           key: key,
+           organizationName: organizationName,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'WaitingApprovalRoute';
 
@@ -785,10 +885,7 @@ class WaitingApprovalRoute extends PageRouteInfo<WaitingApprovalRouteArgs> {
 }
 
 class WaitingApprovalRouteArgs {
-  const WaitingApprovalRouteArgs({
-    this.key,
-    required this.organizationName,
-  });
+  const WaitingApprovalRouteArgs({this.key, required this.organizationName});
 
   final Key? key;
 

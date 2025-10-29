@@ -64,7 +64,8 @@ class ProkerProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> approveProker(
+  // Changed return type from Future<void> to Future<bool>
+  Future<bool> approveProker(
     String prokerId,
     int approvalIndex,
     String approvedBy,
@@ -75,13 +76,17 @@ class ProkerProvider extends ChangeNotifier {
         approvalIndex,
         approvedBy,
       );
+      notifyListeners();
+      return true;
     } catch (e) {
       _error = e.toString();
       notifyListeners();
+      return false;
     }
   }
 
-  Future<void> markPreparationComplete(
+  // Changed return type from Future<void> to Future<bool>
+  Future<bool> markPreparationComplete(
     String prokerId,
     String preparationId,
     String completedBy,
@@ -92,18 +97,25 @@ class ProkerProvider extends ChangeNotifier {
         preparationId,
         completedBy,
       );
+      notifyListeners();
+      return true;
     } catch (e) {
       _error = e.toString();
       notifyListeners();
+      return false;
     }
   }
 
-  Future<void> updateProkerProgress(String prokerId, int progress) async {
+  // Changed return type from Future<void> to Future<bool>
+  Future<bool> updateProkerProgress(String prokerId, int progress) async {
     try {
       await _firestoreService.updateProkerProgress(prokerId, progress);
+      notifyListeners();
+      return true;
     } catch (e) {
       _error = e.toString();
       notifyListeners();
+      return false;
     }
   }
 
