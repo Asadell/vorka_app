@@ -59,12 +59,15 @@ class MeetingProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> markAttendance(String meetingId, String userId) async {
+  Future<bool> markAttendance(String meetingId, String userId) async {
     try {
       await _firestoreService.markAttendance(meetingId, userId);
+      notifyListeners();
+      return true;
     } catch (e) {
       _error = e.toString();
       notifyListeners();
+      return false;
     }
   }
 

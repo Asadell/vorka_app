@@ -81,9 +81,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MeetingDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<MeetingDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MeetingDetailScreen(),
+        child: MeetingDetailScreen(
+          key: args.key,
+          meetingId: args.meetingId,
+        ),
       );
     },
     MeetingListRoute.name: (routeData) {
@@ -123,9 +127,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     QrAttendanceRoute.name: (routeData) {
+      final args = routeData.argsAs<QrAttendanceRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const QrAttendanceScreen(),
+        child: QrAttendanceScreen(
+          key: args.key,
+          meetingId: args.meetingId,
+        ),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -384,16 +392,40 @@ class MainRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MeetingDetailScreen]
-class MeetingDetailRoute extends PageRouteInfo<void> {
-  const MeetingDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class MeetingDetailRoute extends PageRouteInfo<MeetingDetailRouteArgs> {
+  MeetingDetailRoute({
+    Key? key,
+    required String meetingId,
+    List<PageRouteInfo>? children,
+  }) : super(
           MeetingDetailRoute.name,
+          args: MeetingDetailRouteArgs(
+            key: key,
+            meetingId: meetingId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MeetingDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<MeetingDetailRouteArgs> page =
+      PageInfo<MeetingDetailRouteArgs>(name);
+}
+
+class MeetingDetailRouteArgs {
+  const MeetingDetailRouteArgs({
+    this.key,
+    required this.meetingId,
+  });
+
+  final Key? key;
+
+  final String meetingId;
+
+  @override
+  String toString() {
+    return 'MeetingDetailRouteArgs{key: $key, meetingId: $meetingId}';
+  }
 }
 
 /// generated route for
@@ -482,16 +514,40 @@ class ProkerListRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [QrAttendanceScreen]
-class QrAttendanceRoute extends PageRouteInfo<void> {
-  const QrAttendanceRoute({List<PageRouteInfo>? children})
-      : super(
+class QrAttendanceRoute extends PageRouteInfo<QrAttendanceRouteArgs> {
+  QrAttendanceRoute({
+    Key? key,
+    required String meetingId,
+    List<PageRouteInfo>? children,
+  }) : super(
           QrAttendanceRoute.name,
+          args: QrAttendanceRouteArgs(
+            key: key,
+            meetingId: meetingId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'QrAttendanceRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<QrAttendanceRouteArgs> page =
+      PageInfo<QrAttendanceRouteArgs>(name);
+}
+
+class QrAttendanceRouteArgs {
+  const QrAttendanceRouteArgs({
+    this.key,
+    required this.meetingId,
+  });
+
+  final Key? key;
+
+  final String meetingId;
+
+  @override
+  String toString() {
+    return 'QrAttendanceRouteArgs{key: $key, meetingId: $meetingId}';
+  }
 }
 
 /// generated route for
