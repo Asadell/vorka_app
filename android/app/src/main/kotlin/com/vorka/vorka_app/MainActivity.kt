@@ -1,4 +1,4 @@
-package com.example.vorka_app2
+package com.vorka.vorka_app
 
 import io.flutter.embedding.android.FlutterActivity
 

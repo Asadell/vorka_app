@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093109375247",
+    "project_id": "vorka-app-9b3ef",
+    "storage_bucket": "vorka-app-9b3ef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093109375247:android:f87e8c3408cefa9f095e7a",
+        "android_client_info": {
+          "package_name": "com.vorka.vorka_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKX0Os_B8BuyfPdg8D75WDtPmzsnK5qew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
